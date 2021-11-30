@@ -30,7 +30,9 @@ connections.once('open', () => {
 const userRoutes = require('./routes/users');
 const exerciseRoutes = require('./routes/exercises');
 
-app.use(cors());
+app.use(cors())
+app.use(express.json())
+
 app.use('/exercises',exerciseRoutes);
 app.use('/users', userRoutes);
 
