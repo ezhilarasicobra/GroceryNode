@@ -9,29 +9,24 @@ require('dotenv').config();
 const app = express();
 
 // port
-const port = process.env.PORT || 3006;
+const port = process.env.PORT || 5000;
 
 
-app.use(express.json());
+//connect db
 
-//mongo db
-const uri = process.env.atlasUri
-mongoose.connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
+const connectDb=require('./db')
+connectDb()
 
-const connections = mongoose.connection;
-connections.once('open', () => {
-    console.log('Mongodb connected successfully');
-});
+
+
 
 // routes
 const userRoutes = require('./routes/users');
 const exerciseRoutes = require('./routes/exercises');
 
+app.use(express.json({limit:"30mb",extended:true}))
+app.use(express.urlencoded({limit:"30mb",extended:true}))
 app.use(cors())
-app.use(express.json())
 
 app.use('/exercises',exerciseRoutes);
 app.use('/users', userRoutes);
