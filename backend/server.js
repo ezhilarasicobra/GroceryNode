@@ -11,7 +11,7 @@ const app = express();
 // port
 const port = process.env.PORT || 3006;
 
-app.use(cors());
+
 app.use(express.json());
 
 //mongo db
@@ -30,6 +30,7 @@ connections.once('open', () => {
 const userRoutes = require('./routes/users');
 const exerciseRoutes = require('./routes/exercises');
 
+app.use(cors());
 app.use('/exercises',exerciseRoutes);
 app.use('/users', userRoutes);
 
