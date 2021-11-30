@@ -3,17 +3,17 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    username: {
+    productname: {
         type: 'string',
         required: true,
         unique: true,
-        minLength: 4,
+        minLength: 2,
         trim: true
     },
 }, {
     timestamp: true
 });
 
-const User = mongoose.model('User', userSchema);
+const Product = mongoose.model('User', userSchema);
 
-module.exports = User;
+module.exports = Product;

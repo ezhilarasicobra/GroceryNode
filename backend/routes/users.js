@@ -1,8 +1,8 @@
 const router = require('express').Router();
-let User = require('../modals/users.modals');
+let Product = require('../modals/users.modals');
 
 router.get('/', (req, res) => {
-    User.find().then((users) => {
+    Product.find().then((users) => {
         res.json(users)
     }).catch((err) => {
         res.status(400).json('Error : ' + err)
@@ -10,11 +10,11 @@ router.get('/', (req, res) => {
 });
 
 router.post('/add', (req, res) => {
-    const username = req.body.username;
-    const newUser = new User({ username });
+    const productname = req.body.productname;
+    const newproduct = new Product({ productname });
 
-    newUser.save().then(() => {
-        res.json(username + ' user added!!!');
+    newproduct.save().then(() => {
+        res.json(newproduct + ' product added!!!');
     }).catch(err => {
         res.json('Error: ' + err);
     });

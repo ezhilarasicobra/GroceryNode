@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const exerciseSchema = new Schema({
-    username: { type: 'string', required: true },
-    description: { type: 'string', required: true},
-    duration: { type: 'number', required: true},
+const productSchema = new Schema({
+    productname: { type: 'string', required: true },
+    notes: { type: 'string', required: true},
+    quantity: { type: 'number', required: true},
     date: { type: 'string', required: true}
 }, {
     timestamp: true
 });
 
-const Exercise = mongoose.model('Exercise', exerciseSchema);
+const Grocery = mongoose.model('Product', productSchema);
 
-module.exports = Exercise;
+module.exports = Grocery;

@@ -1,59 +1,59 @@
 const router = require('express').Router();
-let Exercise = require('../modals/exercise.modals');
+let Grocery = require('../modals/exercise.modals');
 
 router.get('/', (req, res) => {
-    Exercise.find().then((exercises) => {
-        res.json(exercises)
+    Grocery.find().then((item) => {
+        res.json(item)
     }).catch((err) => {
         res.status(400).json('Error : ' + err)
     });
 });
 
 router.post('/add', (req, res) => {
-    const username = req.body.username;
-    const description = req.body.description;
-    const duration = req.body.duration;
+    const productname = req.body.username;
+    const notes = req.body.description;
+    const quantity = req.body.duration;
     const date = Date.parse(req.body.date);
 
-    const newExercise = new Exercise({
-        username,
-        description,
-        duration,
+    const newProduct = new Grocery({
+        productname,
+        notes,
+        quantity,
         date
     });
 
-    newExercise.save().then(() => {
-        res.json(' Exercise added!!!');
+    newProduct.save().then(() => {
+        res.json(' New Product added!!!');
     }).catch(err => {
         res.json('Error: ' + err);
     });
 });
 
 router.get('/:id', (req, res) => {
-    Exercise.findById(req.params.id).then((exercises) => {
-        res.json(exercises)
+    Grocery.findById(req.params.id).then((item) => {
+        res.json(item)
     }).catch((err) => {
         res.status(400).json('Error : ' + err)
     });
 });
 
 router.delete('/:id', (req, res) => {
-    Exercise.findByIdAndDelete(req.params.id).then((exercises) => {
-        res.json(' User deleted!!!');
+    Grocery.findByIdAndDelete(req.params.id).then((item) => {
+        res.json(' Item deleted!!!');
     }).catch((err) => {
         res.status(400).json('Error : ' + err)
     });
 });
 
 router.post('/update/:id', (req, res) => {
-    Exercise.findById(req.params.id).then((exercises) => {
-        exercises.username = req.body.username;
-        exercises.description = req.body.description;
-        exercises.duration = Number(req.body.duration);
+    Grocery.findById(req.params.id).then((exercises) => {
+        exercises.productname = req.body.productname;
+        exercises.notes = req.body.notes;
+        exercises.quantity = Number(req.body.quantity);
         exercises.date = Date.parse(req.body.date);
 
         exercise.save().then(() => {
-            res.json(' Exercise Updated!!!');
+            res.json(' Product Updated!!!');
         }).catch(err => {
             res.json('Error: ' + err);
         });
